@@ -15,21 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Hazel\Core.h">
+    <ClInclude Include="src\sauropod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\Application.h">
+    <ClInclude Include="src\sauropod\application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel.h">
+    <ClInclude Include="src\sauropod\core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Hazel\EntryPoint.h">
+    <ClInclude Include="src\sauropod\entry_point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sauropod\log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Hazel\Application.cpp">
+    <ClCompile Include="src\sauropod\application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sauropod\log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
