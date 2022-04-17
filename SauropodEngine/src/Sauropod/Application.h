@@ -1,8 +1,8 @@
 #pragma once
 
-#include "core.h"
+#include "Core.h"
 
-namespace sauropod {
+namespace Sauropod {
 
 	class SAUROPOD_API Application
 	{

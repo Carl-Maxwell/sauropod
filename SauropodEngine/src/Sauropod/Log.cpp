@@ -1,8 +1,8 @@
 
-#include "log.h"
+#include "Log.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 
-namespace sauropod{
+namespace Sauropod{
 
 	std::shared_ptr<spdlog::logger> Log::s_EngineLogger;
 	std::shared_ptr<spdlog::logger> Log::s_ClientLogger;

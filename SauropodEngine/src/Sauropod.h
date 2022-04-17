@@ -2,9 +2,9 @@
 
 // For use by Hazel applications
 
-#include "sauropod/application.h"
-#include "sauropod/log.h"
+#include "Sauropod/Application.h"
+#include "Sauropod/Log.h"
 
 // ---Entry Point---------------------
-#include "sauropod/entry_point.h"
+#include "Sauropod/EntryPoint.h"
 // -----------------------------------

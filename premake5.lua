@@ -10,25 +10,25 @@ workspace "Sauropod"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-project "Sauropod_Engine"
-  location "sauropod_game_engine"
+project "SauropodEngine"
+  location "SauropodEngine"
   kind "SharedLib"
   language "C++"
 
   -- TODO: for some reason I wasn't able to use %{prj.location}
 
-  targetdir ("bin/" .. outputdir .. "/sauropod_game_engine") 
-  objdir ("bin-intermediate/" .. outputdir .. "/sauropod_game_engine") 
+  targetdir ("bin/" .. outputdir .. "/SauropodEngine") 
+  objdir ("bin-intermediate/" .. outputdir .. "/SauropodEngine") 
 
   files
   {
-    "sauropod_game_engine/src/**.h",
-    "sauropod_game_engine/src/**.cpp"
+    "SauropodEngine/src/**.h",
+    "SauropodEngine/src/**.cpp"
   }
 
   includedirs
   {
-    "sauropod_game_engine/vendor/spdlog/include"
+    "SauropodEngine/vendor/spdlog/include"
   }
 
   filter "system:windows"
@@ -45,7 +45,7 @@ project "Sauropod_Engine"
   
   postbuildcommands
   {
-    "{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/sandbox"
+    "{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"
   }
 
   filter "configurations:Debug"
@@ -61,28 +61,28 @@ project "Sauropod_Engine"
     optimize "On"
   
 project "Sandbox"
-  location "sandbox"
+  location "Sandbox"
   kind "ConsoleApp"
   language "C++"
 
-  targetdir ("bin/" .. outputdir .. "/sandbox") 
-  objdir ("bin-intermediate/" .. outputdir .. "/sandbox") 
+  targetdir ("bin/" .. outputdir .. "/Sandbox") 
+  objdir ("bin-intermediate/" .. outputdir .. "/Sandbox") 
 
   files
   {
-    "sandbox/src/**.h",
-    "sandbox/src/**.cpp"
+    "Sandbox/src/**.h",
+    "Sandbox/src/**.cpp"
   }
 
   includedirs
   {
-    "sauropod_game_engine/vendor/spdlog/include",
-    "sauropod_game_engine/src"
+    "SauropodEngine/vendor/spdlog/include",
+    "SauropodEngine/src"
   }
 
   links
   {
-    "Sauropod_Engine"
+    "SauropodEngine"
   }
 
   filter "system:windows"
