@@ -1,0 +1,3 @@
+[submodule "SauropodEngine/vendor/spdlog"]
+	path = SauropodEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
