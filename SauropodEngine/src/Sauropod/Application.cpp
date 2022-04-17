@@ -1,8 +1,8 @@
-#include "application.h"
+#include "Application.h"
 
 #include <stdio.h>
 
-namespace sauropod {
+namespace Sauropod {
 
 	Application::Application()
 	{
