@@ -2,6 +2,8 @@
 
 #include "Core.h"
 
+#include "Events/Event.h"
+
 namespace Sauropod {
 
 	class SAUROPOD_API Application

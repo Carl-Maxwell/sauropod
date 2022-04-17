@@ -4,6 +4,9 @@
     <Filter Include="Sauropod">
       <UniqueIdentifier>{52981559-3E65-7064-677E-5E0C53AAA5F2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sauropod\Events">
+      <UniqueIdentifier>{F673663E-62FF-D302-6B10-57F7D71A3003}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Sauropod.h" />
@@ -16,9 +19,22 @@
     <ClInclude Include="src\Sauropod\EntryPoint.h">
       <Filter>Sauropod</Filter>
     </ClInclude>
+    <ClInclude Include="src\Sauropod\Events\ApplicationEvent.h">
+      <Filter>Sauropod\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sauropod\Events\Event.h">
+      <Filter>Sauropod\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sauropod\Events\KeyEvent.h">
+      <Filter>Sauropod\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sauropod\Events\MouseEvent.h">
+      <Filter>Sauropod\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Sauropod\Log.h">
       <Filter>Sauropod</Filter>
     </ClInclude>
+    <ClInclude Include="src\hzpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Sauropod\Application.cpp">
@@ -27,5 +43,6 @@
     <ClCompile Include="src\Sauropod\Log.cpp">
       <Filter>Sauropod</Filter>
     </ClCompile>
+    <ClCompile Include="src\hzpch.cpp" />
   </ItemGroup>
 </Project>

@@ -20,6 +20,9 @@ project "SauropodEngine"
   targetdir ("bin/" .. outputdir .. "/SauropodEngine") 
   objdir ("bin-intermediate/" .. outputdir .. "/SauropodEngine") 
 
+  pchheader "hzpch.h"
+  pchsource "SauropodEngine/src/hzpch.cpp"
+
   files
   {
     "SauropodEngine/src/**.h",
@@ -28,6 +31,7 @@ project "SauropodEngine"
 
   includedirs
   {
+    "SauropodEngine/src",
     "SauropodEngine/vendor/spdlog/include"
   }
 
