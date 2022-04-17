@@ -1,3 +1,6 @@
 [submodule "SauropodEngine/vendor/spdlog"]
 	path = SauropodEngine/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "SauropodEngine/vendor/glfw"]
+	path = SauropodEngine/vendor/glfw
+	url = https://github.com/TheCherno/glfw
