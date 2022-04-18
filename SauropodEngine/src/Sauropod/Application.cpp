@@ -23,6 +23,7 @@ namespace Sauropod {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
 
+		if (e.IsInCategory(EventCategory::EventCategoryMouse)) { return; }
 		HZ_CORE_TRACE("{0}", e);
 	}
 
