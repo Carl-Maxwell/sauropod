@@ -20,7 +20,10 @@ namespace Sauropod {
 
 	void Application::OnEvent(Event &e)
 	{
-		HZ_CORE_INFO("{0}", e);
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowCloseEvent>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
+
+		HZ_CORE_TRACE("{0}", e);
 	}
 
 	void Application::Run()
@@ -31,6 +34,12 @@ namespace Sauropod {
 			glClear(GL_COLOR_BUFFER_BIT);
 			m_Window->OnUpdate();
 		}
+	}
+
+	bool Application::OnWindowClose(WindowCloseEvent& e) 
+	{
+		m_Running = false;
+		return true;
 	}
 
 }
