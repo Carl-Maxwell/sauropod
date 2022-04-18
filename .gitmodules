@@ -4,3 +4,6 @@
 [submodule "SauropodEngine/vendor/glfw"]
 	path = SauropodEngine/vendor/glfw
 	url = https://github.com/TheCherno/glfw
+[submodule "SauropodEngine/vendor/imgui"]
+	path = SauropodEngine/vendor/imgui
+	url = https://github.com/Carl-Maxwell/imgui
