@@ -12,11 +12,13 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["GLFW"] = "SauropodEngine/vendor/glfw/include"
-IncludeDir["Glad"] = "SauropodEngine/vendor/Glad/include"
+IncludeDir["GLFW"]  = "SauropodEngine/vendor/glfw/include"
+IncludeDir["Glad"]  = "SauropodEngine/vendor/Glad/include"
+IncludeDir["imgui"] = "SauropodEngine/vendor/imgui/include"
 
 include "SauropodEngine/vendor/glfw"
 include "SauropodEngine/vendor/Glad"
+include "SauropodEngine/vendor/imgui"
 
 project "SauropodEngine"
 	location "SauropodEngine"
@@ -43,11 +45,13 @@ project "SauropodEngine"
 		"SauropodEngine/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
+		"%{IncludeDir.imgui}"
 	}
 	links 
 	{ 
 		"GLFW",
 		"Glad",
+		"imgui",
 		"opengl32.lib"
 	}
 
