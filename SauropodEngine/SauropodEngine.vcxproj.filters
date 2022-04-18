@@ -40,6 +40,12 @@
     <ClInclude Include="src\Sauropod\Events\MouseEvent.h">
       <Filter>Sauropod\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Sauropod\Layer.h">
+      <Filter>Sauropod</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sauropod\LayerStack.h">
+      <Filter>Sauropod</Filter>
+    </ClInclude>
     <ClInclude Include="src\Sauropod\Log.h">
       <Filter>Sauropod</Filter>
     </ClInclude>
@@ -53,6 +59,12 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Sauropod\Application.cpp">
+      <Filter>Sauropod</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sauropod\Layer.cpp">
+      <Filter>Sauropod</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sauropod\LayerStack.cpp">
       <Filter>Sauropod</Filter>
     </ClCompile>
     <ClCompile Include="src\Sauropod\Log.cpp">

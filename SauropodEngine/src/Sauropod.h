@@ -3,6 +3,7 @@
 // For use by Hazel applications
 
 #include "Sauropod/Application.h"
+#include "Sauropod/Layer.h"
 #include "Sauropod/Log.h"
 
 // ---Entry Point---------------------
