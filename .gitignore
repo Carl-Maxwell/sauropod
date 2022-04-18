@@ -9,3 +9,6 @@ bin-intermediate/
 # Vscode
 .vscode/*
 
+# glad binary build folders
+SauropodEngine/vendor/Glad/bin/
+SauropodEngine/vendor/Glad/bin-intermediate/

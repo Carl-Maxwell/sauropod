@@ -4,7 +4,7 @@
 #include "Sauropod/Events/ApplicationEvent.h"
 #include "Sauropod/Log.h"
 
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 namespace Sauropod {
 
