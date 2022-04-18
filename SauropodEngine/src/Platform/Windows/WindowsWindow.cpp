@@ -49,7 +49,7 @@ namespace Sauropod {
 		glfwMakeContextCurrent(m_Window);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
-		
+
 		//
 		// Set GLFW Callbacks
 		//
