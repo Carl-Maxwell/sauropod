@@ -7,6 +7,10 @@
 
 #include "glfw/glfw3.h"
 
+#include "Sauropod/Events/ApplicationEvent.h"
+#include "Sauropod/Events/KeyEvent.h"
+#include "Sauropod/Events/MouseEvent.h"
+
 namespace Sauropod{
 
 	ImguiLayer::ImguiLayer()
@@ -31,14 +35,148 @@ namespace Sauropod{
 
 		// TODO io.KeyMap
 		//io.AddKeyEvent();
-		io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;
+		// io.KeyMap[ImGuiKey_Tab] = GLF_KEY_TAB;
 
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
-static ImGuiKey ImGui_ImplGlfw_KeyToImGuiKey(int key)
+	void ImguiLayer::OnDetach()
+	{
+
+	}
+
+	void ImguiLayer::OnUpdate()
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		auto& app = Application::Get();
+		app.GetWindow();
+		io.DisplaySize =ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight()); 
+
+		float time = (float)glfwGetTime();
+		io.DeltaTime = m_Time > 0.0 ? (time - m_Time) : (1.0f / 60.0f);
+		m_Time = time;
+
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui::NewFrame();
+
+		static bool show = true;
+		ImGui::ShowDemoWindow(&show);
+
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	}
+
+	static ImGuiKey ImGui_ImplGlfw_KeyToImGuiKey(int key);
+	int AsciiCharacterToAsciiInteger(const char* asciiCharacter);
+
+	void ImguiLayer::OnEvent(Event& event)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+
+		// keyboard events
+		if (event.IsInCategory(Sauropod::EventCategoryKeyboard)) 
+		{
+			bool pressed = event.GetEventType() == Sauropod::EventType::KeyPressed;
+			// TODO handle repeat key presses
+
+			int glfwKey;
+			if (pressed)
+			{
+				glfwKey = ((Sauropod::KeyPressedEvent*)&event)->GetKeyCode();
+			}
+			else
+			{
+				glfwKey = ((Sauropod::KeyReleasedEvent*)&event)->GetKeyCode();
+			}
+
+			bool repeat = ((Sauropod::KeyPressedEvent*)&event)->GetRepeatCount();
+
+			// handle text typing input
+			if (glfwKey != GLFW_KEY_UNKNOWN && !repeat) 
+			{
+				const char* asciiCharacter = glfwGetKeyName(glfwKey, 0); // second arg is ignored by GLFW
+
+				// TODO if shift or capslock mod, then capitalize asciiCharacter
+
+				// if printable character
+				if (asciiCharacter && asciiCharacter[0] != 0 && asciiCharacter[1] == 0)
+				{
+					int intCharacter;
+			
+					if (glfwKey >= GLFW_KEY_KP_0 && glfwKey <= GLFW_KEY_KP_EQUAL) {
+						intCharacter = glfwKey;
+					} else {
+						intCharacter = AsciiCharacterToAsciiInteger(asciiCharacter);
+					}
+
+					io.AddInputCharacter(intCharacter);
+
+					// TODO see ImGui_ImplGlfw_TranslateUntranslatedKey
+					// there's a lot of edge cases to cover here
+				}
+			}
+
+			auto imgui_key = ImGui_ImplGlfw_KeyToImGuiKey(glfwKey);
+			io.AddKeyEvent(imgui_key, pressed ? true : false);
+		}
+		// Mouse move event
+		else if (event.GetEventType() == Sauropod::EventType::MouseMoved) 
+		{
+			auto& mouseMoveEvent = *((Sauropod::MouseMovedEvent*)&event);
+			io.AddMousePosEvent(mouseMoveEvent.GetX(), mouseMoveEvent.GetY());
+		} 
+		// Mouse pressed / released
+		else if (event.IsInCategory(Sauropod::EventCategoryMouseButton)) 
+		{
+			bool pressed = event.GetEventType() == Sauropod::EventType::MouseButtonPressed;
+
+			int glfwMouseButton = ((Sauropod::MouseButtonEvent*)&event)->GetMouseButton();
+			
+			if (glfwMouseButton >= 0 && glfwMouseButton < ImGuiMouseButton_COUNT)
+				io.AddMouseButtonEvent(glfwMouseButton, pressed);
+		}
+		// Mouse scrolled
+		else if (event.GetEventType() == Sauropod::EventType::MouseScrolled)
+		{
+			auto& scrollEvent = *((Sauropod::MouseScrolledEvent*)&event);
+			io.AddMouseWheelEvent(scrollEvent.GetXOffset(), scrollEvent.GetYOffset());
+		}
+	}
+
+int AsciiCharacterToAsciiInteger(const char* asciiCharacter) 
 {
-	switch (key)
+	// this is copy/pasted from imgui_impl_glfw.cpp, code style  was changed for consistency
+	const char char_names[] = "`-="    "[]\\"    ",;\'"    "./";
+	const int char_keys[] = { 
+		GLFW_KEY_GRAVE_ACCENT, GLFW_KEY_MINUS, GLFW_KEY_EQUAL, 
+		GLFW_KEY_LEFT_BRACKET, GLFW_KEY_RIGHT_BRACKET, GLFW_KEY_BACKSLASH, 
+		GLFW_KEY_COMMA, GLFW_KEY_SEMICOLON, GLFW_KEY_APOSTROPHE, 
+		GLFW_KEY_PERIOD, GLFW_KEY_SLASH, 0 
+	};
+	IM_ASSERT(IM_ARRAYSIZE(char_names) == IM_ARRAYSIZE(char_keys));
+
+	if (asciiCharacter[0] >= '0' && asciiCharacter[0] <= '9')
+	{ 
+		return GLFW_KEY_0 + (asciiCharacter[0] - '0'); 
+	}
+	else if (asciiCharacter[0] >= 'A' && asciiCharacter[0] <= 'Z')          
+	{ 
+		return GLFW_KEY_A + (asciiCharacter[0] - 'a'); 
+	}
+	else if (asciiCharacter[0] >= 'a' && asciiCharacter[0] <= 'z')
+	{ 
+		return GLFW_KEY_A + (asciiCharacter[0] - 'A');
+	}
+	else if (const char* p = strchr(char_names, asciiCharacter[0]))   
+	{ 
+		return char_keys[p - char_names]; 
+	}
+
+}
+
+static ImGuiKey ImGui_ImplGlfw_KeyToImGuiKey(int glfwKey)
+{
+	switch (glfwKey)
 	{
 		case GLFW_KEY_TAB: return ImGuiKey_Tab;
 		case GLFW_KEY_LEFT: return ImGuiKey_LeftArrow;
@@ -148,37 +286,5 @@ static ImGuiKey ImGui_ImplGlfw_KeyToImGuiKey(int key)
 		default: return ImGuiKey_None;
 	}
 }
-
-	void ImguiLayer::OnDetach()
-	{
-
-	}
-
-	void ImguiLayer::OnUpdate()
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		auto& app = Application::Get();
-		app.GetWindow();
-		io.DisplaySize =ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight()); 
-
-		float time = (float)glfwGetTime();
-		io.DeltaTime = m_Time > 0.0 ? (time - m_Time) : (1.0f / 60.0f);
-		m_Time = time;
-
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui::NewFrame();
-
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
-
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	}
-
-	void ImguiLayer::OnEvent(Event& event)
-	{
-
-	}
-
 
 }
