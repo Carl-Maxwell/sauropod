@@ -12,3 +12,7 @@ bin-intermediate/
 # glad binary build folders
 SauropodEngine/vendor/Glad/bin/
 SauropodEngine/vendor/Glad/bin-intermediate/
+
+# imgui ini files
+
+*imgui.ini
