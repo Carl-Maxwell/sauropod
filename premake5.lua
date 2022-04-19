@@ -14,7 +14,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"]  = "SauropodEngine/vendor/glfw/include"
 IncludeDir["Glad"]  = "SauropodEngine/vendor/Glad/include"
-IncludeDir["imgui"] = "SauropodEngine/vendor/imgui/include"
+IncludeDir["imgui"] = "SauropodEngine/vendor/imgui/"
 
 include "SauropodEngine/vendor/glfw"
 include "SauropodEngine/vendor/Glad"

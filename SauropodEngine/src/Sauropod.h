@@ -6,6 +6,8 @@
 #include "Sauropod/Layer.h"
 #include "Sauropod/Log.h"
 
+#include "imgui/ImguiLayer.h"
+
 // ---Entry Point---------------------
 #include "Sauropod/EntryPoint.h"
 // -----------------------------------
